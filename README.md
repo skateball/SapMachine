@@ -29,7 +29,7 @@
 
 
 
-| Date        |         |         |         |         |         |         |
+| ReleaseDate |         |         |         |         |         |         |
 |-------------|---------|---------|---------|---------|---------|---------|
 | 16.Jan2019  | ![GitHub downloads (11.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.2/total?label=11.0.2&logo=sap&cacheSeconds=90000)   |         |         |         |         |         |
 | 17.Apr2019  | ![GitHub downloads (11.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.3/total?label=11.0.3&logo=sap&cacheSeconds=90000)   | ![GitHub downloads (12.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-12.0.1/total?label=12.0.1&color=white&logo=sap&cacheSeconds=90000) |         |         |         |         |
@@ -68,15 +68,15 @@
 |   .Jan2026  |         | 17.0.18 | 21.0.9  | 25.0.2  |         |         |
 |   .Mar2026  |         |         |         |         | 26      |         |
 
+Downloads of that Release from ReleaseDate up to now. 
+Values cached for 24h
 
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/sap/sapmachine/latest)
+![GitHub last commit](https://img.shields.io/github/last-commit/sap/sapmachine)
+[![GitHub release (latest by date)](https://img.shields.io/github/downloads/sap/sapmachine/latest/total?label=Downloads%20of%20Latest%20Release)](https://sap.github.io/SapMachine/#download) 
+[![DockerPulls](https://img.shields.io/docker/pulls/_/sapmachine?label=Docker%20Pulls)](https://hub.docker.com/_/sapmachine)
 
-
-
-
-
-[![GitHub release (latest by date)](https://img.shields.io/github/downloads/sap/sapmachine/latest/total?label=Downloads%20of%20Latest%20Release)](https://sap.github.io/SapMachine/#download) [![DockerPulls](https://img.shields.io/docker/pulls/_/sapmachine?label=Docker%20Pulls)](https://hub.docker.com/_/sapmachine)
-
-[![Release Date](https://img.shields.io/github/release-date/sap/sapmachine?color=blue)](https://github.com/sap/sapmachine/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/sap/sapmachine)](https://github.com/sap/sapmachine/releases/latest)
 [![Latest Release](https://img.shields.io/github/release/sap/sapmachine.svg)](https://github.com/sap/sapmachine/releases/latest)
 [![License](https://img.shields.io/github/license/sap/sapmachine.svg)](https://github.com/sap/sapmachine/blob/master/LICENSE)
 
