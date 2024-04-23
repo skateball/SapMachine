@@ -1,4 +1,83 @@
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/sap/sapmachine/total)
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/sap/sapmachine/latest/total)
+
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22.0.1/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22/total)
+
+![GitHub Downloads (all assets, sapmachine-21.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.3/total)
+![GitHub Downloads (all assets, sapmachine-21.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.2/total)
+![GitHub Downloads (all assets, sapmachine-21.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.1/total)
+![GitHub Downloads (all assets, sapmachine-21)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21/total)
+
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.11/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.10/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.9/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17/total)
+
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.23/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.22/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.21/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.20/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.19/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.18/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.17/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.16/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.15/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.14/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.3/total)
+![GitHub Downloads (all assets, specific tag)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.2/total)
+
+
+
+| Date        |         |         |         |         |         |         |
+|-------------|---------|---------|---------|---------|---------|---------|
+| 16.Jan2019  | ![GitHub downloads (11.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.2/total)   |         |         |         |         |         |
+| 17.Apr2019  | ![GitHub downloads (11.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.3/total)   | ![GitHub downloads (12.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-12.0.1/total?color=white) |         |         |         |         |
+| 17.July2019 | ![GitHub downloads (11.0.4)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.4/total)   | ![GitHub downloads (12.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-12.0.2/total?color=white) |         |         |         |         |
+| 16.Oct2019  | ![GitHub downloads (11.0.5)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.5/total)   | ![GitHub downloads (13.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-13.0.1/total?color=white) |         |         |         |         |
+| 15.Jan2020  | ![GitHub downloads (11.0.6)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.6/total)   | ![GitHub downloads (13.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-13.0.2/total?color=white) |         |         |         |         |
+| 15.Apr2020  | ![GitHub downloads (11.0.7)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.7/total)   | ![GitHub downloads (14.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-14.0.1/total?color=white) |         |         |         |         |
+| 15.Jul2020  | ![GitHub downloads (11.0.8)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.8/total)   | ![GitHub downloads (14.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-14.0.2/total?color=white) |         |         |         |         |
+| 22.Oct2020  | ![GitHub downloads (11.0.9)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.9/total)   | ![GitHub downloads (15.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-15.0.1/total?color=white) |         |         |         |         |
+| 19.Jan2021  | ![GitHub downloads (11.0.10)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.10/total) | ![GitHub downloads (15.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-15.0.2/total?color=white) |         |         |         |         |
+| 20.Apr2021  | ![GitHub downloads (11.0.11)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.11/total) | ![GitHub downloads (16.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-16.0.1/total?color=white) |         |         |         |         |
+| 20.July2021 | ![GitHub downloads (11.0.12)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.12/total) | ![GitHub downloads (16.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-16.0.2/total?color=white) |         |         |         |         |
+| 14.Sept2021 |         | ![GitHub downloads (17)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17/total?color=yellow)   |         |         |         |         |
+| 19/21.Oct2021  | ![GitHub downloads (11.0.13)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.13/total) | ![GitHub downloads (17.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.1/total)  |         |         |         |         |
+| 18.Jan2022  | ![GitHub downloads (11.0.14)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.14/total) | ![GitHub downloads (17.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.2/total)  |         |         |         |         |
+| 19.Apr2022  | ![GitHub downloads (11.0.15)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.15/total) | ![GitHub downloads (17.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.3/total)  | ![GitHub downloads (18.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-18.0.1/total?color=white)        |         |         |         |
+| 19.July2022 | ![GitHub downloads (11.0.16)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.16/total) | ![GitHub downloads (17.0.4)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.4/total)  | ![GitHub downloads (18.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-18.0.2/total?color=white)        |         |         |         |
+| 18.Oct2022  | ![GitHub downloads (11.0.17)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.17/total) | ![GitHub downloads (17.0.5)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.5/total)  | ![GitHub downloads (19.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-19.0.1/total?color=white)        |         |         |         |
+| 17/18.Jan2023  | ![GitHub downloads (11.0.18)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.18/total) | ![GitHub downloads (17.0.6)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.6/total)  | ![GitHub downloads (19.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-19.0.2/total?color=white)        |         |         |         |
+| 19/18.Apr2023  | ![GitHub downloads (11.0.19)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.19/total) | ![GitHub downloads (17.0.7)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.7/total)  | ![GitHub downloads (20.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-20.0.1/total?color=white)       |         |         |         |
+| 18.July2023 | ![GitHub downloads (11.0.20)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.20/total) | ![GitHub downloads (17.0.8)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.8/total)  | ![GitHub downloads (20.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-20.0.2/total?color=white)        |         |         |         |
+| 18.Sept2023 |         |         | ![GitHub downloads (21)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21/total?color=yellow)      |         |         |         |
+| 18.Oct2023  | ![GitHub downloads (11.0.21)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.21/total) | ![GitHub downloads (17.0.9)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.9/total)  | ![GitHub downloads (21.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.1/total)  |         |         |         |
+| 16.Jan2024  | ![GitHub downloads (11.0.22)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.22/total) | ![GitHub downloads (17.0.10)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.10/total) | ![GitHub downloads (21.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.2/total)  |         |         |         |
+| 19.Mar2024  |         |         |         | ![GitHub downloads (22](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22/total?color=yellow)      |         |         |
+| 17.Apr2024  | ![GitHub downloads (11.0.23)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.23/total) | ![GitHub downloads (17.0.11)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.11/total) | ![GitHub downloads (21.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.3/total)  | ![GitHub downloads (22.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22.0.1/total?color=white)  |         |         |
+|   .July2024 | ![GitHub downloads (11.0.24)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.24/total) | ![GitHub downloads (17.0.12)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.12/total) | ![GitHub downloads (21.0.4)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.4/total)  | ![GitHub downloads (22.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22.0.2/total?color=white)  |         |         |
+|   .Sept2024 |         |         |         |         | 23      |         |
+| 31.Sept2024 |         |         |         |   EOL   |         |         |
+|   .Oct2024  | 11.0.25 | 17.0.13 | 21.0.4  |         | 23.0.1  |         |
+| 31.Dec2024  |   EOL   |         |         |         |         |         |
+|   .Jan2025  |         | 17.0.14 | 21.0.5  |         | 23.0.2  |         |
+|   .Mar2025  |         |         |         |         |         | 24      |
+| 31.Mar2025  |         |         |         |         |   EOL   |         |
+|   .Apr2025  |         | 17.0.15 | 21.0.6  |         |         | 24.0.1  |
+
+
+
+
+
+
+
 [![GitHub release (latest by date)](https://img.shields.io/github/downloads/sap/sapmachine/latest/total?label=Downloads%20of%20Latest%20Release)](https://sap.github.io/SapMachine/#download) [![DockerPulls](https://img.shields.io/docker/pulls/_/sapmachine?label=Docker%20Pulls)](https://hub.docker.com/_/sapmachine)
+
+[![Release Date](https://img.shields.io/github/release-date/sap/sapmachine?color=blue)](https://github.com/sap/sapmachine/releases/latest)
+[![Latest Release](https://img.shields.io/github/release/sap/sapmachine.svg)](https://github.com/sap/sapmachine/releases/latest)
+[![License](https://img.shields.io/github/license/sap/sapmachine.svg)](https://github.com/sap/sapmachine/blob/master/LICENSE)
+
 
 <img align="right" width=350 src="https://sap.github.io/SapMachine/assets/images/logo_circular.svg">
 
