@@ -75,10 +75,15 @@ Values cached for 24h
 ![GitHub last commit](https://img.shields.io/github/last-commit/sap/sapmachine)
 [![GitHub release (latest by date)](https://img.shields.io/github/downloads/sap/sapmachine/latest/total?label=Downloads%20of%20Latest%20Release)](https://sap.github.io/SapMachine/#download) 
 [![DockerPulls](https://img.shields.io/docker/pulls/_/sapmachine?label=Docker%20Pulls)](https://hub.docker.com/_/sapmachine)
+![Docker Image Size](https://img.shields.io/docker/image-size/_/sapmachine)
+
 
 [![GitHub Release Date](https://img.shields.io/github/release-date/sap/sapmachine)](https://github.com/sap/sapmachine/releases/latest)
 [![Latest Release](https://img.shields.io/github/release/sap/sapmachine.svg)](https://github.com/sap/sapmachine/releases/latest)
 [![License](https://img.shields.io/github/license/sap/sapmachine.svg)](https://github.com/sap/sapmachine/blob/master/LICENSE)
+
+![GitHub Tag](https://img.shields.io/github/v/tag/sap/sapmachine)
+
 
 
 <img align="right" width=350 src="https://sap.github.io/SapMachine/assets/images/logo_circular.svg">
