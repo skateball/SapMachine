@@ -57,14 +57,16 @@
 | 19.Mar2024  |         |         |         | ![GitHub downloads (22](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22/total?label=22&color=yellow&logo=sap&cacheSeconds=90000)      |         |         |
 | 17.Apr2024  | ![GitHub downloads (11.0.23)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.23/total?label=11.0.23&logo=sap&cacheSeconds=90000) | ![GitHub downloads (17.0.11)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.11/total?label=17.0.11&logo=sap&cacheSeconds=90000) | ![GitHub downloads (21.0.3)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.3/total?label=21.0.3&logo=sap&cacheSeconds=90000)  | ![GitHub downloads (22.0.1)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22.0.1/total?label=22.0.1&color=white&logo=sap&cacheSeconds=90000)  |         |         |
 |   .July2024 | ![GitHub downloads (11.0.24)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-11.0.24/total?label=11.0.24&logo=sap&cacheSeconds=90000) | ![GitHub downloads (17.0.12)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-17.0.12/total?label=17.0.12&logo=sap&cacheSeconds=90000) | ![GitHub downloads (21.0.4)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-21.0.4/total?label=21.0.4&logo=sap&cacheSeconds=90000)  | ![GitHub downloads (22.0.2)](https://img.shields.io/github/downloads/sap/sapmachine/sapmachine-22.0.2/total?label=22.0.2&color=white&logo=sap&cacheSeconds=90000)  |         |         |
-|   .Sept2024 |         |         |         |         | 23      |         |
-| 31.Sept2024 |         |         |         |   EOL   |         |         |
-|   .Oct2024  | 11.0.25 | 17.0.13 | 21.0.4  |         | 23.0.1  |         |
-| 31.Dec2024  |   EOL   |         |         |         |         |         |
-|   .Jan2025  |         | 17.0.14 | 21.0.5  |         | 23.0.2  |         |
-|   .Mar2025  |         |         |         |         |         | 24      |
-| 31.Mar2025  |         |         |         |         |   EOL   |         |
-|   .Apr2025  |         | 17.0.15 | 21.0.6  |         |         | 24.0.1  |
+|   .Sept2024 |         |         |         | 23      |         |         |
+|   .Oct2024  | 11.0.25 | 17.0.13 | 21.0.4  | 23.0.1  |         |         |
+|   .Jan2025  |         | 17.0.14 | 21.0.5  | 23.0.2  |         |         |
+|   .Mar2025  |         |         |         | 24      |         |         |
+|   .Apr2025  |         | 17.0.15 | 21.0.6  | 24.0.1  |         |         |
+|   .July2025 |         | 17.0.16 | 21.0.7  | 24.0.2  |         |         |
+|   .Sept2025 |         |         |         | 25      |         |         |
+|   .Oct2025  |         | 17.0.17 | 21.0.8  | 25.0.1  |         |         |
+|   .Jan2026  |         | 17.0.18 | 21.0.9  | 25.0.2  |         |         |
+|   .Mar2026  |         |         |         |         | 26      |         |
 
 
 
