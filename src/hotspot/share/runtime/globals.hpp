@@ -699,11 +699,13 @@ const int ObjectAlignmentInBytes = 8;
           "from JVM "                                                       \
           "(also see HeapDumpPath, HeapDumpGzipLevel)")                     \
                                                                             \
+  /* SapMachine 2024-05-10: HeapDumpPath for jcmd */                        \
   product(ccstr, HeapDumpPath, nullptr, MANAGEABLE,                         \
           "When HeapDumpOnOutOfMemoryError, HeapDumpBeforeFullGC "          \
-          "or HeapDumpAfterFullGC is on, the path (filename or "            \
-          "directory) of the dump file (defaults to java_pid<pid>.hprof "   \
-          "in the working directory)")                                      \
+          "or HeapDumpAfterFullGC is on, or a heap dump is triggered by "   \
+          "jcmd GC.heap_dump without specifying a path, the path "          \
+          "(filename or directory) of the dump file. "                      \
+          "(defaults to java_pid<pid>.hprof in the working directory)")     \
                                                                             \
   product(int, HeapDumpGzipLevel, 0, MANAGEABLE,                            \
           "When HeapDumpOnOutOfMemoryError, HeapDumpBeforeFullGC "          \
@@ -1021,6 +1023,9 @@ const int ObjectAlignmentInBytes = 8;
   develop(bool, TraceBytecodes, false,                                      \
           "Trace bytecode execution")                                       \
                                                                             \
+  develop(bool, TraceBytecodesTruncated, false,                             \
+          "Truncate non control-flow bytecode when tracing bytecode")       \
+                                                                            \
   develop(bool, VerifyDependencies, trueInDebug,                            \
           "Exercise and verify the compilation dependency mechanism")       \
                                                                             \
@@ -1116,9 +1121,6 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   develop(bool, UseCHA, true,                                               \
           "Enable CHA")                                                     \
-                                                                            \
-  product(bool, UseVtableBasedCHA, true,  DIAGNOSTIC,                       \
-          "Use vtable information during CHA")                              \
                                                                             \
   product(bool, UseTypeProfile, true,                                       \
           "Check interpreter profile for historically monomorphic calls")   \
@@ -1549,7 +1551,7 @@ const int ObjectAlignmentInBytes = 8;
   product(size_t, CompressedClassSpaceSize, 1*G,                            \
           "Maximum size of class area in Metaspace when compressed "        \
           "class pointers are used")                                        \
-          range(1*M, 3*G)                                                   \
+          range(1*M, LP64_ONLY(4*G) NOT_LP64(max_uintx))                    \
                                                                             \
   develop(size_t, CompressedClassSpaceBaseAddress, 0,                       \
           "Force the class space to be allocated at this address or "       \
@@ -1560,9 +1562,6 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   product(bool, PrintMetaspaceStatisticsAtExit, false, DIAGNOSTIC,          \
           "Print metaspace statistics upon VM exit.")                       \
-                                                                            \
-  develop(bool, MetaspaceGuardAllocations, false,                           \
-          "Metapace allocations are guarded.")                              \
                                                                             \
   product(uintx, MinHeapFreeRatio, 40, MANAGEABLE,                          \
           "The minimum percentage of heap free after GC to avoid expansion."\
@@ -1577,11 +1576,6 @@ const int ObjectAlignmentInBytes = 8;
           " ParallelGC it applies to the whole heap.")                      \
           range(0, 100)                                                     \
           constraint(MaxHeapFreeRatioConstraintFunc,AfterErgo)              \
-                                                                            \
-  product(bool, ShrinkHeapInSteps, true,                                    \
-          "When disabled, informs the GC to shrink the java heap directly"  \
-          " to the target size at the next full GC rather than requiring"   \
-          " smaller steps during multiple full GCs.")                       \
                                                                             \
   product(intx, SoftRefLRUPolicyMSPerMB, 1000,                              \
           "Number of milliseconds per MB of free space in the heap")        \
@@ -2103,10 +2097,6 @@ const int ObjectAlignmentInBytes = 8;
   product(bool, UseFastUnorderedTimeStamps, false, EXPERIMENTAL,            \
           "Use platform unstable time where supported for timestamps only") \
                                                                             \
-  product(bool, UseEmptySlotsInSupers, true,                                \
-          "(Deprecated) Allow allocating fields in empty slots of "         \
-          "super-classes")                                                  \
-                                                                            \
   product(bool, DeoptimizeNMethodBarriersALot, false, DIAGNOSTIC,           \
                 "Make nmethod barriers deoptimise a lot.")                  \
                                                                             \
@@ -2116,9 +2106,9 @@ const int ObjectAlignmentInBytes = 8;
              "fence. Add cleanliness checks.")                              \
                                                                             \
   product(int, LockingMode, LM_LIGHTWEIGHT,                                 \
-          "Select locking mode: "                                           \
-          "0: monitors only (LM_MONITOR), "                                 \
-          "1: monitors & legacy stack-locking (LM_LEGACY), "                \
+          "(Deprecated) Select locking mode: "                              \
+          "0: (Deprecated) monitors only (LM_MONITOR), "                    \
+          "1: (Deprecated) monitors & legacy stack-locking (LM_LEGACY), "   \
           "2: monitors & new lightweight locking (LM_LIGHTWEIGHT, default)") \
           range(0, 2)                                                       \
                                                                             \

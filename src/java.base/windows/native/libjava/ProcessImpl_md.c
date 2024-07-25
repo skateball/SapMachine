@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -270,7 +270,9 @@ static jlong processCreate(
     const jchar *penvBlock,
     const jchar *pdir,
     jlong *handles,
-    jboolean redirectErrorStream)
+    jboolean redirectErrorStream,
+    /* SapMachine 2024-07-01: process group extension */
+    jlongArray processGroup)
 {
     jlong ret = 0L;
     STARTUPINFOW si = {sizeof(si)};
@@ -328,6 +330,10 @@ static jlong processCreate(
                         processFlag &= ~CREATE_NO_WINDOW;
                     }
 
+                    /* SapMachine 2024-07-01: process group extension */
+                    if (processGroup)
+                        processFlag |= CREATE_SUSPENDED;
+
                     si.dwFlags = STARTF_USESTDHANDLES;
                     if (!CreateProcessW(
                         NULL,             /* executable name */
@@ -343,6 +349,17 @@ static jlong processCreate(
                     {
                         win32Error(env, L"CreateProcess");
                     } else {
+                        /* SapMachine 2024-07-01: process group extension */
+                        if (processGroup) {
+                            __declspec(align(8)) HANDLE hJob = CreateJobObject(NULL, NULL);
+                            if (!hJob) {
+                                win32Error(env, L"CreateJobObject");
+                            } else {
+                                (*env)->SetLongArrayRegion(env, processGroup, 0, 1, (jlong *) &hJob);
+                                AssignProcessToJobObject(hJob, pi.hProcess);
+                            }
+                            ResumeThread(pi.hThread);
+                        }
                         closeSafely(pi.hThread);
                         ret = (jlong)pi.hProcess;
                     }
@@ -364,7 +381,9 @@ Java_java_lang_ProcessImpl_create(JNIEnv *env, jclass ignored,
                                   jstring envBlock,
                                   jstring dir,
                                   jlongArray stdHandles,
-                                  jboolean redirectErrorStream)
+                                  jboolean redirectErrorStream,
+                                  /* SapMachine 2024-07-01: process group extension */
+                                  jlongArray processGroup)
 {
     jlong ret = 0;
     if (cmd != NULL && stdHandles != NULL) {
@@ -393,7 +412,9 @@ Java_java_lang_ProcessImpl_create(JNIEnv *env, jclass ignored,
                                 penvBlock,
                                 pdir,
                                 handles,
-                                redirectErrorStream);
+                                redirectErrorStream,
+                                /* SapMachine 2024-07-01: process group extension */
+                                processGroup);
                             free(pcmdCopy);   // free mutable command line
                         }
                         (*env)->ReleaseLongArrayElements(env, stdHandles, handles, 0);
@@ -467,15 +488,23 @@ Java_java_lang_ProcessImpl_terminateProcess(JNIEnv *env, jclass ignored, jlong h
 JNIEXPORT jboolean JNICALL
 Java_java_lang_ProcessImpl_isProcessAlive(JNIEnv *env, jclass ignored, jlong handle)
 {
-    DWORD dwExitStatus;
-    GetExitCodeProcess((HANDLE) handle, &dwExitStatus);
-    return dwExitStatus == STILL_ACTIVE;
+    return WaitForSingleObject((HANDLE) handle, 0) /* don't wait */
+                       == WAIT_TIMEOUT;
 }
 
 JNIEXPORT jboolean JNICALL
 Java_java_lang_ProcessImpl_closeHandle(JNIEnv *env, jclass ignored, jlong handle)
 {
     return (jboolean) CloseHandle((HANDLE) handle);
+}
+
+/* SapMachine 2024-07-01: process group extension */
+JNIEXPORT void JNICALL
+Java_java_lang_ProcessImpl_terminateProcessGroup(JNIEnv *env, jclass ignored, jlong hJob)
+{
+    if (TerminateJobObject((HANDLE) hJob, 1) == 0) {
+        win32Error(env, L"TerminateJobObject");
+    }
 }
 
 JNIEXPORT jlong JNICALL

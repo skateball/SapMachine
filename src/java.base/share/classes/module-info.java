@@ -165,6 +165,7 @@ module java.base {
         java.desktop,
         java.logging,
         java.management,
+        java.management.rmi,
         java.naming,
         java.rmi,
         jdk.charsets,
@@ -172,6 +173,8 @@ module java.base {
         jdk.jlink,
         jdk.jfr,
         jdk.net,
+        // SapMachine 2024-06-12: process group extension
+        jdk.sapext,
         jdk.sctp,
         jdk.crypto.cryptoki;
     exports jdk.internal.foreign to
