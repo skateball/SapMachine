@@ -578,7 +578,7 @@ const int ObjectAlignmentInBytes = 8;
           "malloc trace if enabled at startup.")                            \
           range(1, 1000)                                                    \
                                                                             \
-  product(bool, MallocTraceUseBacktrace, true,                              \
+  product(bool, MallocTraceUseBacktrace, PPC_ONLY(false) NOT_PPC(true),     \
           "If set we use the backtrace() call to sample the stacks of "     \
           "the malloc trace if enabled at startup. Note that while this "   \
           "creates better stack traces, it is also slower and not "         \
@@ -939,10 +939,6 @@ const int ObjectAlignmentInBytes = 8;
           "Eagerly initialize -Xrun libraries; allows startup profiling, "  \
           "but not all -Xrun libraries may support the state of the VM "    \
           "at this time")                                                   \
-                                                                            \
-  product(bool, PreserveAllAnnotations, false,                              \
-          "(Deprecated) Preserve RuntimeInvisibleAnnotations as well "      \
-          "as RuntimeVisibleAnnotations")                                   \
                                                                             \
   develop(uintx, PreallocatedOutOfMemoryErrorCount, 4,                      \
           "Number of OutOfMemoryErrors preallocated with backtrace")        \
@@ -1458,6 +1454,12 @@ const int ObjectAlignmentInBytes = 8;
                                                                             \
   develop(int, MaxElementPrintSize, 256,                                    \
           "maximum number of elements to print")                            \
+                                                                            \
+  develop(int, MaxStringPrintSize, 256,                                     \
+          "maximum number of characters to print for a java.lang.String "   \
+          "in the VM. If exceeded, an abridged version of the string is "   \
+          "printed with the middle of the string elided.")                  \
+          range(2, O_BUFLEN)                                                \
                                                                             \
   develop(intx, MaxSubklassPrintSize, 4,                                    \
           "maximum number of subklasses to print when printing klass")      \
