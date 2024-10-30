@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2021, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -62,12 +62,13 @@ public class VersionCheck extends TestHelper {
         "jweblauncher",
         "jpackage",
         "ssvagent",
-        "jwebserver"
+        "jwebserver",
+        // SapMachine 2024-10-07: asprof was added on some platforms but has different command line flags
+        "asprof"
     };
 
     // tools that do not accept -version
     static final String[] BLACKLIST_VERSION = {
-        "appletviewer",
         "controlpanel",
         "jaccessinspector",
         "jaccessinspector-32",
@@ -108,7 +109,9 @@ public class VersionCheck extends TestHelper {
         "rmiregistry",
         "serialver",
         "servertool",
-        "ssvagent"
+        "ssvagent",
+        // SapMachine 2024-10-07: asprof was added on some platforms but has different command line flags
+        "asprof"
     };
 
     // expected reference strings
