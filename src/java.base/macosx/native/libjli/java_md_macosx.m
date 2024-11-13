@@ -149,7 +149,7 @@ GetExecName() {
 /*
  * Exports the JNI interface from libjli
  *
- * This allows client code to link against the .jre/.jdk bundles,
+ * This allows client code to link against the JDK bundles,
  * and not worry about trying to pick a HotSpot to link against.
  *
  * Switching architectures is unsupported, since client code has
@@ -162,10 +162,10 @@ static char *sPreferredJVMType = NULL;
 static InvocationFunctions *GetExportedJNIFunctions() {
     if (sExportedJNIFunctions != NULL) return sExportedJNIFunctions;
 
-    char jrePath[PATH_MAX];
-    jboolean gotJREPath = GetJREPath(jrePath, sizeof(jrePath), JNI_FALSE);
-    if (!gotJREPath) {
-        JLI_ReportErrorMessage("Failed to GetJREPath()");
+    char jdkRoot[PATH_MAX];
+    jboolean got = GetJDKInstallRoot(jdkRoot, sizeof(jdkRoot), JNI_FALSE);
+    if (!got) {
+        JLI_ReportErrorMessage("Failed to determine JDK installation root");
         return NULL;
     }
 
@@ -183,7 +183,7 @@ static InvocationFunctions *GetExportedJNIFunctions() {
     }
 
     char jvmPath[PATH_MAX];
-    jboolean gotJVMPath = GetJVMPath(jrePath, preferredJVM, jvmPath, sizeof(jvmPath));
+    jboolean gotJVMPath = GetJVMPath(jdkRoot, preferredJVM, jvmPath, sizeof(jvmPath));
     if (!gotJVMPath) {
         JLI_ReportErrorMessage("Failed to GetJVMPath()");
         return NULL;
@@ -326,9 +326,9 @@ static void MacOSXStartup(int argc, char *argv[]) {
 
 void
 CreateExecutionEnvironment(int *pargc, char ***pargv,
-                           char jrepath[], jint so_jrepath,
+                           char jdkroot[], jint so_jdkroot,
                            char jvmpath[], jint so_jvmpath,
-                           char jvmcfg[],  jint so_jvmcfg) {
+                           char jvmcfg[], jint so_jvmcfg) {
     /* Compute/set the name of the executable */
     SetExecname(*pargv);
 
@@ -336,13 +336,13 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
     int  argc         = *pargc;
     char **argv       = *pargv;
 
-    /* Find out where the JRE is that we will be using. */
-    if (!GetJREPath(jrepath, so_jrepath, JNI_FALSE) ) {
-        JLI_ReportErrorMessage(JRE_ERROR1);
+    /* Find out where the JDK is that we will be using. */
+    if (!GetJDKInstallRoot(jdkroot, so_jdkroot, JNI_FALSE) ) {
+        JLI_ReportErrorMessage(LAUNCHER_ERROR1);
         exit(2);
     }
     JLI_Snprintf(jvmcfg, so_jvmcfg, "%s%slib%sjvm.cfg",
-                 jrepath, FILESEP, FILESEP);
+                 jdkroot, FILESEP, FILESEP);
 
     /* SapMachine 2023-09-18: New malloc trace */
     if (ShouldPreloadLibMallocHooks(*pargc, *pargv)) {
@@ -352,16 +352,16 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
         char* env_entry;
 
         if ((old_env == NULL) || (old_env[0] == '0')) {
-            size_t size = JLI_StrLen(jrepath) + JLI_StrLen(libpath) + JLI_StrLen(env_name) + 2;
+            size_t size = JLI_StrLen(jdkroot) + JLI_StrLen(libpath) + JLI_StrLen(env_name) + 2;
             env_entry = JLI_MemAlloc(size);
 
-            snprintf(env_entry, size, "%s=%s%s", env_name, jrepath, libpath);
+            snprintf(env_entry, size, "%s=%s%s", env_name, jdkroot, libpath);
         } else {
-            size_t size = JLI_StrLen(jrepath) + JLI_StrLen(libpath) + JLI_StrLen(env_name) +
+            size_t size = JLI_StrLen(jdkroot) + JLI_StrLen(libpath) + JLI_StrLen(env_name) +
                           3 + JLI_StrLen(old_env);
             env_entry = JLI_MemAlloc(size);
 
-            snprintf(env_entry, size, "%s=%s%s:%s", env_name, jrepath, libpath, old_env);
+            snprintf(env_entry, size, "%s=%s%s:%s", env_name, jdkroot, libpath, old_env);
         }
 
         if (putenv(env_entry) == 0) {
@@ -382,7 +382,7 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
         exit(4);
     }
 
-    if (!GetJVMPath(jrepath, jvmtype, jvmpath, so_jvmpath)) {
+    if (!GetJVMPath(jdkroot, jvmtype, jvmpath, so_jvmpath)) {
         JLI_ReportErrorMessage(CFG_ERROR8, jvmtype, jvmpath);
         exit(4);
     }
@@ -404,7 +404,7 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
  * VM choosing is done by the launcher (java.c).
  */
 static jboolean
-GetJVMPath(const char *jrepath, const char *jvmtype,
+GetJVMPath(const char *jdkroot, const char *jvmtype,
            char *jvmpath, jint jvmpathsize)
 {
     struct stat s;
@@ -416,7 +416,7 @@ GetJVMPath(const char *jrepath, const char *jvmtype,
          * macosx client library is built thin, i386 only.
          * 64 bit client requests must load server library
          */
-        JLI_Snprintf(jvmpath, jvmpathsize, "%s/lib/%s/" JVM_DLL, jrepath, jvmtype);
+        JLI_Snprintf(jvmpath, jvmpathsize, "%s/lib/%s/" JVM_DLL, jdkroot, jvmtype);
     }
 
     JLI_TraceLauncher("Does `%s' exist ... ", jvmpath);
@@ -434,15 +434,15 @@ GetJVMPath(const char *jrepath, const char *jvmtype,
 }
 
 /*
- * Find path to JRE based on .exe's location or registry settings.
+ * Find path to the JDK installation root
  */
 static jboolean
-GetJREPath(char *path, jint pathsize, jboolean speculative)
+GetJDKInstallRoot(char *path, jint pathsize, jboolean speculative)
 {
     char libjava[MAXPATHLEN];
 
     if (GetApplicationHome(path, pathsize)) {
-        /* Is JRE co-located with the application? */
+        /* Is the JDK co-located with the application? */
         if (JLI_IsStaticallyLinked()) {
             char jvm_cfg[MAXPATHLEN];
             JLI_Snprintf(jvm_cfg, sizeof(jvm_cfg), "%s/lib/jvm.cfg", path);
@@ -471,7 +471,7 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
 
     /* try to find ourselves instead */
     Dl_info selfInfo;
-    dladdr(&GetJREPath, &selfInfo);
+    dladdr(&GetJDKInstallRoot, &selfInfo);
 
     if (JLI_IsStaticallyLinked()) {
         char jvm_cfg[MAXPATHLEN];
@@ -514,8 +514,8 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
         return JNI_TRUE;
     }
 
-    // If libjli.dylib is loaded from a macos bundle MacOS dir, find the JRE dir
-    // in ../Home.
+    // If libjli.dylib is loaded from a macos bundle MacOS dir, find the JDK
+    // install root at ../Home.
     const char altLastPathComponent[] = "/MacOS/libjli.dylib";
     size_t sizeOfAltLastPathComponent = sizeof(altLastPathComponent) - 1;
     if (pathLen < sizeOfLastPathComponent) {
@@ -531,7 +531,7 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
     }
 
     if (!speculative)
-      JLI_ReportErrorMessage(JRE_ERROR8 JAVA_DLL);
+      JLI_ReportErrorMessage(LAUNCHER_ERROR2 JAVA_DLL);
     return JNI_FALSE;
 }
 
@@ -668,27 +668,27 @@ static void* hSplashLib = NULL;
 
 void* SplashProcAddress(const char* name) {
     if (!hSplashLib) {
-        char jrePath[PATH_MAX];
-        if (!GetJREPath(jrePath, sizeof(jrePath), JNI_FALSE)) {
-            JLI_ReportErrorMessage(JRE_ERROR1);
+        char jdkRoot[PATH_MAX];
+        if (!GetJDKInstallRoot(jdkRoot, sizeof(jdkRoot), JNI_FALSE)) {
+            JLI_ReportErrorMessage(LAUNCHER_ERROR1);
             return NULL;
         }
 
         char splashPath[PATH_MAX];
         const int ret = JLI_Snprintf(splashPath, sizeof(splashPath),
-                "%s/lib/%s", jrePath, SPLASHSCREEN_SO);
+                                     "%s/lib/%s", jdkRoot, SPLASHSCREEN_SO);
         if (ret >= (int)sizeof(splashPath)) {
-            JLI_ReportErrorMessage(JRE_ERROR11);
+            JLI_ReportErrorMessage(LAUNCHER_ERROR3);
             return NULL;
         }
         if (ret < 0) {
-            JLI_ReportErrorMessage(JRE_ERROR13);
+            JLI_ReportErrorMessage(LAUNCHER_ERROR5);
             return NULL;
         }
 
         hSplashLib = dlopen(splashPath, RTLD_LAZY | RTLD_GLOBAL);
         // It's OK if dlopen() fails. The splash screen library binary file
-        // might have been stripped out from the JRE image to reduce its size
+        // might have been stripped out from the JDK image to reduce its size
         // (e.g. on embedded platforms).
 
         if (hSplashLib) {
