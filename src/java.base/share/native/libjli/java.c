@@ -906,8 +906,7 @@ CheckJvmType(int *pargc, char ***argv, jboolean speculative) {
 // SapMachine 2023-09-18: new malloc trace
 jboolean ShouldPreloadLibMallocHooks(int argc, char **argv) {
 #if defined(__APPLE__) || defined(LINUX)
-    jboolean uses_new_trace = JNI_FALSE;
-    jboolean uses_old_trace = JNI_FALSE;
+    jboolean uses_malloc_trace = JNI_FALSE;
 #if defined(__APPLE__)
     char const* env_name = "DYLD_INSERT_LIBRARIES";
     char const* libpath = "libmallochooks.dylib";
@@ -940,13 +939,7 @@ jboolean ShouldPreloadLibMallocHooks(int argc, char **argv) {
 
         if ((JLI_StrCmp("-XX:+UseMallocHooks", arg) == 0) ||
             (JLI_StrCmp("-J-XX:+UseMallocHooks", arg) == 0)) {
-            uses_new_trace = JNI_TRUE;
-            continue;
-        }
-
-        if ((JLI_StrCmp("-XX:+EnableMallocTrace", arg) == 0) ||
-            (JLI_StrCmp("-J-XX:+EnableMallocTrace", arg) == 0)) {
-            uses_old_trace = JNI_TRUE;
+            uses_malloc_trace = JNI_TRUE;
             continue;
         }
 
@@ -962,7 +955,7 @@ jboolean ShouldPreloadLibMallocHooks(int argc, char **argv) {
         }
     }
 
-    return (uses_new_trace && !uses_old_trace) ? JNI_TRUE : JNI_FALSE;
+    return uses_malloc_trace;
 #endif
 
     return JNI_FALSE;
