@@ -100,17 +100,6 @@ gc/stress/gclocker/TestExcessGCLockerCollections.java 8229120 generic-all
 
 # :hotspot_runtime
 
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id0 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id1 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id2 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id3 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id4 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id5 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id6 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id7 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id8 8344583 macosx-aarch64
-runtime/CommandLine/OptionsValidation/TestOptionsWithRanges.java#id9 8344583 macosx-aarch64
-
 runtime/jni/terminatedThread/TestTerminatedThread.java 8317789 aix-ppc64
 # SapMachine 2022-12-16 Exclude a failing test
 runtime/jni/daemonDestroy/TestDaemonDestroy.java windows-all
