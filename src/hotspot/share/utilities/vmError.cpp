@@ -80,8 +80,6 @@
 #ifdef LINUX
 // SapMachine 2019-02-20: Vitals
 #include "vitals_linux_himemreport.hpp"
-// SapMachine 2021-09-01: malloc-trace
-#include "malloctrace/mallocTrace.hpp"
 #endif
 // SapMachine 2023-08-15: malloc trace
 #if defined(LINUX) || defined(__APPLE__)
@@ -107,8 +105,8 @@ const char*       VMError::_message;
 char              VMError::_detail_msg[1024];
 Thread*           VMError::_thread;
 address           VMError::_pc;
-void*             VMError::_siginfo;
-void*             VMError::_context;
+const void*       VMError::_siginfo;
+const void*       VMError::_context;
 bool              VMError::_print_native_stack_used = false;
 const char*       VMError::_filename;
 int               VMError::_lineno;
@@ -544,7 +542,7 @@ static void print_oom_reasons(outputStream* st) {
   st->print_cr("# This output file may be truncated or incomplete.");
 }
 
-static void print_stack_location(outputStream* st, void* context, int& continuation) {
+static void print_stack_location(outputStream* st, const void* context, int& continuation) {
   const int number_of_stack_slots = 8;
 
   int i = continuation;
@@ -729,10 +727,6 @@ void VMError::report(outputStream* st, bool _verbose) {
   address lastpc = nullptr;
 
   BEGIN
-  if (MemTracker::enabled() && NmtVirtualMemory_lock != nullptr && NmtVirtualMemory_lock->owned_by_self()) {
-    // Manually unlock to avoid reentrancy due to mallocs in detailed mode.
-    NmtVirtualMemory_lock->unlock();
-  }
 
   STEP("printing fatal error message")
     st->print_cr("#");
@@ -1239,7 +1233,7 @@ void VMError::report(outputStream* st, bool _verbose) {
 
   STEP_IF("printing owned locks on error", _verbose)
     // mutexes/monitors that currently have an owner
-    print_owned_locks_on_error(st);
+    Mutex::print_owned_locks_on_error(st);
     st->cr();
 
   STEP_IF("printing number of OutOfMemoryError and StackOverflow exceptions",
@@ -1376,17 +1370,6 @@ void VMError::report(outputStream* st, bool _verbose) {
   STEP_IF("printing internal vm info", _verbose)
     st->print_cr("vm_info: %s", VM_Version::internal_vm_info_string());
     st->cr();
-
-  // SapMachine 2021-09-01: malloc-trace
-#if defined(LINUX) && defined(HAVE_GLIBC_MALLOC_HOOKS)
-  STEP("printing Malloc Trace info")
-
-    if (_verbose) {
-      st->print_cr("sapmachine malloc trace");
-      sap::MallocTracer::print_on_error(st);
-      st->cr();
-    }
-#endif
 
   // print a defined marker to show that error handling finished correctly.
   STEP_IF("printing end marker", _verbose)
@@ -1583,12 +1566,6 @@ void VMError::print_vm_info(outputStream* st) {
   st->print_cr("vm_info: %s", VM_Version::internal_vm_info_string());
   st->cr();
 
-#if defined(LINUX) && defined(HAVE_GLIBC_MALLOC_HOOKS)
-  // SapMachine 2021-09-01: malloc-trace
-  st->print_cr("sapmachine malloc trace");
-  sap::MallocTracer::print_on_error(st);
-#endif
-
   // print a defined marker to show that error handling finished correctly.
   // STEP("printing end marker")
 
@@ -1651,8 +1628,8 @@ int VMError::prepare_log_file(const char* pattern, const char* default_pattern, 
   return fd;
 }
 
-void VMError::report_and_die(Thread* thread, unsigned int sig, address pc, void* siginfo,
-                             void* context, const char* detail_fmt, ...)
+void VMError::report_and_die(Thread* thread, unsigned int sig, address pc, const void* siginfo,
+                             const void* context, const char* detail_fmt, ...)
 {
   va_list detail_args;
   va_start(detail_args, detail_fmt);
@@ -1660,7 +1637,7 @@ void VMError::report_and_die(Thread* thread, unsigned int sig, address pc, void*
   va_end(detail_args);
 }
 
-void VMError::report_and_die(Thread* thread, void* context, const char* filename, int lineno, const char* message,
+void VMError::report_and_die(Thread* thread, const void* context, const char* filename, int lineno, const char* message,
                              const char* detail_fmt, ...) {
   va_list detail_args;
   va_start(detail_args, detail_fmt);
@@ -1668,12 +1645,12 @@ void VMError::report_and_die(Thread* thread, void* context, const char* filename
   va_end(detail_args);
 }
 
-void VMError::report_and_die(Thread* thread, unsigned int sig, address pc, void* siginfo, void* context)
+void VMError::report_and_die(Thread* thread, unsigned int sig, address pc, const void* siginfo, const void* context)
 {
   report_and_die(thread, sig, pc, siginfo, context, "%s", "");
 }
 
-void VMError::report_and_die(Thread* thread, void* context, const char* filename, int lineno, const char* message,
+void VMError::report_and_die(Thread* thread, const void* context, const char* filename, int lineno, const char* message,
                              const char* detail_fmt, va_list detail_args)
 {
   report_and_die(INTERNAL_ERROR, message, detail_fmt, detail_args, thread, nullptr, nullptr, context, filename, lineno, 0);
@@ -1685,7 +1662,7 @@ void VMError::report_and_die(Thread* thread, const char* filename, int lineno, s
 }
 
 void VMError::report_and_die(int id, const char* message, const char* detail_fmt, va_list detail_args,
-                             Thread* thread, address pc, void* siginfo, void* context, const char* filename,
+                             Thread* thread, address pc, const void* siginfo, const void* context, const char* filename,
                              int lineno, size_t size)
 {
 #if defined(LINUX) || defined(__APPLE__)

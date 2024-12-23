@@ -106,11 +106,6 @@
 #include "runtime/globals.hpp"
 #include "vitals/vitals.hpp"
 
-// SapMachine 2021-09-01: malloc-trace
-#ifdef LINUX
-#include "malloctrace/mallocTrace.hpp"
-#endif
-
 GrowableArray<Method*>* collected_profiled_methods;
 
 static int compare_methods(Method** a, Method** b) {
@@ -376,7 +371,11 @@ void print_statistics() {
 
   ThreadsSMRSupport::log_statistics();
 
-  ClassLoader::print_counters(tty);
+  if (log_is_enabled(Info, perf, class, link)) {
+    LogStreamHandle(Info, perf, class, link) log;
+    log.print_cr("At VM exit:");
+    ClassLoader::print_counters(&log);
+  }
 }
 
 // Note: before_exit() can be executed only once, if more than one threads
@@ -506,12 +505,6 @@ void before_exit(JavaThread* thread, bool halt) {
   if (PrintMemoryMapAtExit) {
     MemMapPrinter::print_all_mappings(tty);
   }
-#ifdef HAVE_GLIBC_MALLOC_HOOKS
-  // SapMachine 2021-09-01: malloc-trace
-  if (PrintMallocTraceAtExit) {
-    sap::MallocTracer::print(tty, true);
-  }
-#endif // HAVE_GLIBC_MALLOC_HOOKS
 #endif
 
   if (JvmtiExport::should_post_thread_life()) {
